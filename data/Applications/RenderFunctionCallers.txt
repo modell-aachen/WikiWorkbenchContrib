@@ -1,0 +1,24 @@
+%META:TOPICINFO{author="micha" comment="reprev" date="1365699387" format="1.1" reprev="3" version="3"}%
+%META:TOPICPARENT{name="TopicFunction"}%
+---++ Parameters
+NONE
+
+---++ Implementation
+<verbatim class="tml">
+%STARTINCLUDE%
+%DBQUERY{"text=~'\b%INCLUDINGTOPIC%\b'"
+  exclude="%INCLUDINGTOPIC%"
+  web="%BASEWEB%"
+  header="<h2 >%MAKETEXT{"Calls to '[_1]'" args="%INCLUDINGTOPIC%"}%</h2>$n"
+  format="   * [[$web.$topic]]"
+  hidenull="on"
+}%%STOPINCLUDE%
+</verbatim>
+
+%DBCALL{"Applications.RenderFunctionCallers"}%
+
+%META:FORM{name="Applications.ApplicationTopic"}%
+%META:FIELD{name="TopicType" title="TopicType" value="TopicFunction"}%
+%META:FIELD{name="TopicTitle" attributes="" title="<nop>TopicTitle" value=""}%
+%META:FIELD{name="Summary" attributes="c" title="Summary" value="Render a list of topics that use a given TopicFunction"}%
+%META:FIELD{name="WikiApplication" attributes="" title="WikiApplication" value="WikiWorkbench"}%

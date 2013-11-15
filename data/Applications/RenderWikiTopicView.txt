@@ -1,0 +1,46 @@
+%META:TOPICINFO{author="ProjectContributor" comment="autosave" date="1356278736" format="1.1" version="6"}%
+%META:TOPICPARENT{name="TopicFunction"}%
+%TOC{depth="2"}%
+
+---++ Documentation
+%STARTSECTION{"documentation"}%
+This function renders a view for a wiki topic,
+showing its title and the summary line.
+
+---+++ Parameters
+   * TITLE_EXTRA: optional addition put behind the topic title
+
+%ENDSECTION{"documentation"}%
+
+---++ Implementation
+<verbatim class="tml">
+%STARTINCLUDE%<!-- -->
+%IF{"'%BASEWEB%.%BASETOPIC%'/text=~'\-\-\-\+[^\+]'" 
+  else="$percntDBCALL{\"%WEB%.%TOPIC%\" section=\"title\"}$percnt"
+}%<!-- -->%STOPINCLUDE%
+</verbatim>
+
+---++ Render title
+<verbatim class="tml">
+%STARTSECTION{"title"}%<noautolink>
+%DBQUERY{topic="%BASEWEB%.%BASETOPIC%"
+  format="<h1 >[[$web.$topic][$expand(topictitle)]] %IF{"defined 'TITLE_EXTRA'" then="<span class='foswikiTopicExtra'>%TITLE_EXTRA%</span>"}% $expand('<br /><span class=\"foswikiTopicSummary\">' and Summary and '</span>')</h1>"
+}%</noautolink>
+%ENDSECTION{"title"}%
+</verbatim>
+
+---++ Test
+%DBCALL{"%TOPIC%" TITLE_EXTRA="(approved)"}%
+
+%DBCALL{"Applications.RenderFunctionCallers"}%
+
+---++ Copyright
+&copy; 2006-2013 Michael Daum http://michaeldaumconsulting.com
+
+%DBCALL{"Applications.GnuGeneralPublicLicense" section="notice"}%
+
+%META:FORM{name="Applications.ApplicationTopic"}%
+%META:FIELD{name="TopicType" title="TopicType" value="DocuTopic, TopicFunction"}%
+%META:FIELD{name="TopicTitle" attributes="" title="<nop>TopicTitle" value=""}%
+%META:FIELD{name="Summary" attributes="c" title="Summary" value=""}%
+%META:FIELD{name="WikiApplication" attributes="" title="WikiApplication" value="WikiWorkbench"}%

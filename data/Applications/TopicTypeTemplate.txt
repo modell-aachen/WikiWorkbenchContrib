@@ -1,0 +1,35 @@
+%META:TOPICINFO{author="micha" comment="autosave" date="1366897438" format="1.1" version="8"}%
+%META:TOPICPARENT{name="TopicTemplate"}%
+%DBCALL{"Applications.RenderTopicInstaller" TEXT="Install '%TOPIC%' TopicType" TYPE="TopicType"}%
+
+---++ Documentation
+%STARTSECTION{"documentation"}%
+%RED%TODO%ENDCOLOR%
+
+%ENDSECTION{"documentation"}%
+
+---++ Topics of type '%TOPIC%'
+%STARTINCLUDE%
+%DBCALL{"Applications.RenderSimpleTopicCreator"
+  LABEL="%MAKETEXT{"Title"}%"
+  BUTTONTEXT="%MAKETEXT{"New"}%"
+  TEXT="%MAKETEXT{"Create a new [_1]" args="<nop>%TOPIC%"}%"
+  VALUE="..."
+  FORM="%WEB%.%TOPIC%"  
+}%
+
+%DBCALL{"Applications.RenderTopicsOfType"}%
+%STOPINCLUDE%
+
+---++ <nop>%TOPIC% form
+| *Name:*| *Type:* | *Size:* | *Values:* | *Description:* | *Attributes:* |
+| TopicType | label | 1 | WikiTopic, ... | Document type  | |
+| <nop>TopicTitle | text | 75 | | title of this topic | |
+| Summary | text | 75 | | Short description of the role of this topic | |
+
+
+%META:FORM{name="Applications.ApplicationTopic"}%
+%META:FIELD{name="TopicType" title="TopicType" value="TopicTemplate"}%
+%META:FIELD{name="TopicTitle" attributes="" title="<nop>TopicTitle" value=""}%
+%META:FIELD{name="Summary" attributes="c" title="Summary" value="Template to create TopicTypes"}%
+%META:FIELD{name="WikiApplication" attributes="" title="WikiApplication" value="WikiWorkbench"}%

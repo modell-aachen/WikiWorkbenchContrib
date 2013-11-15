@@ -1,0 +1,52 @@
+%META:TOPICINFO{author="ProjectContributor" comment="autosave" date="1356278736" format="1.1" version="3"}%
+%META:TOPICPARENT{name="TopicFunction"}%
+%TOC{depth="2"}%
+
+---++ Documentation
+%STARTSECTION{"documentation"}%
+This method is called by Applications.ClassificationApp.RenderCategory to display
+a summary for an object. This method serves as a final fallback when no other TopicType-specific
+method was found.
+
+---+++++ Parameters
+   * OBJECT
+
+%ENDSECTION{"documentation"}%
+
+---++ Implementation
+<verbatim class="tml">
+%STARTINCLUDE%<!-- --><noautolink>
+%DBQUERY{topic="%OBJECT%"
+   format="<div class='clsIndexItem clsTopicItem'>[[$web.$topic][$expand(topictitle)]] $percntREDDOT{\"$web.$topic\"}$percnt
+     <div class='foswikiTopicInfo'>$expand(Summary and ', ')
+      <span class='clsAuthorDateInfo'>
+        $formatTime(info.date),
+        $percntGETTOPICTITLE{\"
+             $percntUSERINFO{\"$expand(info.author)\"
+               format=\"$wikiusername\"
+             }$percnt\"
+        }$percnt
+      </span>
+     </div></div>"
+}%
+</noautolink><!-- -->%STOPINCLUDE%
+</verbatim>
+
+---++ Test
+<div class="alt">
+%DBCALL{"%TOPIC%" OBJECT="%TOPIC%"}%
+</div>
+
+%DBCALL{"Applications.RenderFunctionCallers"}%
+
+---++ Copyright
+&copy; 2008-2013 Michael Daum http://michaeldaumconsulting.com
+
+%DBCALL{"Applications.GnuGeneralPublicLicense" section="notice"}%
+
+
+%META:FORM{name="Applications.ApplicationTopic"}%
+%META:FIELD{name="TopicType" title="TopicType" value="DocuTopic, TopicFunction"}%
+%META:FIELD{name="TopicTitle" attributes="" title="<nop>TopicTitle" value=""}%
+%META:FIELD{name="Summary" attributes="c" title="Summary" value="Fallback to render a summary for WikiTopic that does not have a type specific version of to render an index item"}%
+%META:FIELD{name="WikiApplication" attributes="" title="WikiApplication" value="WikiWorkbench"}%

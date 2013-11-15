@@ -1,0 +1,119 @@
+%META:TOPICINFO{author="micha" comment="reprev" date="1367243436" format="1.1" reprev="23" version="24"}%
+%META:TOPICPARENT{name="TopicFunction"}%
+%TOC{depth="2"}%
+
+---++ Documentation
+%STARTSECTION{"documentation"}%
+This function renders a topic creator form that holds a set of initial input elements to create a topic.
+
+---+++++ Parameters
+   * TEXT: headline text; defaults to "Create a new INCLUDINGTOPIC"
+   * LABEL: label of the !TopicTitle field, defaults to "Title"
+   * BUTTONTEXT: text on the twisty buttinm; default %MAKETEXT{"New"}%
+   * VALUE: initial value of the title input field (optional)
+   * TOPICVALUE: initial value of the topic input field, e.g. =SomeTopicAUTOINC0=
+   * FORM: DataForm to be used when creating a topic, defaults to WikiTopic
+   * TEMPLATE: TopicTemplate to be used (optional)
+   * TYPE: initial TopicType value, defaults to values predefined in the form definition
+   * PARENT: parent topic for the new topic, defaults to the BASETOPIC
+   * WHITEBOARD: switch on/off the whiteboard textarea
+   * EXTRA: additional =&lt;input &hellip; />= 
+   * ACTION: script to be used to create the topic, eg =save= or =edit=, defaults to =edit=
+   * EDITOR: TopicView to be used as an edit_template 
+
+%ENDSECTION{"documentation"}%
+
+---++ Implementation
+<verbatim class="tml">
+%STARTINCLUDE%%TWISTY{
+  link="%BUTTON{
+    "%BUTTONTEXT{default="%MAKETEXT{"New"}%"}%"
+    icon="add"
+  }%%CLEAR%"
+  mode="div"
+}%
+
+<noautolink>
+<form class='createTopicForm' action="%SCRIPTURLPATH{"%ACTION{default="edit"}%"}%/%BASEWEB%/" method="%ACTION{default="get"}%">
+<div class='foswikiFormSteps'>
+<input type="hidden" name="web" value="%BASEWEB%" />
+<input type="hidden" name="onlynewtopic" value="on" />
+<input type="hidden" name="action" value="%IF{"$WHITEBOARD='off'" then="form"}%" />
+<input type="hidden" name="onlywikiname" value="off" />
+<input type="hidden" name="topicparent" value="%PARENT{default="%BASETOPIC%"}%" />
+<input type="hidden" name="templatetopic" value="%TEMPLATE{default=""}%" />
+<input type="hidden" name="formtemplate" value="%FORM{default="%INCLUDINGWEB%.%INCLUDINGTOPIC%"}%" />
+<input type="hidden" name="template" value="%EDITOR{default=""}%" />
+<input type="hidden" name="topic" value="%TOPICVALUE{default="%VALUE{default=""}%"}%" %IF{"'%TOPICVALUE%'=~'AUTOINC'" else="class=\"jqWikiWord {source:'input[name=TopicTitle]'}\""}% />
+%EXTRA{default="<!-- -->"}%
+<h2 >%IF{"defined TEXT"
+       then="$percntTEXT$percnt" 
+       else="%MAKETEXT{"Create a new [_1]" args="<nop>%INCLUDINGTOPIC%"}%"
+     }%
+</h2>
+%RENDERFOREDIT{
+  form="%FORM{default="%INCLUDINGWEB%.%INCLUDINGTOPIC%"}%"
+  topic="%TEMPLATE{default=""}%"
+  fields="TopicTitle"
+  format="<div class='foswikiFormStep'><h3>$title:$mandatory</h3>$edit</div>"
+  TopicTitle_value="%VALUE{default=""}%"
+  TopicTitle_title="%LABEL{default="%MAKETEXT{"Title"}%"}%"
+}%
+%RENDERFOREDIT{
+  form="%FORM{default="%INCLUDINGWEB%.%INCLUDINGTOPIC%"}%"
+  topic="%TEMPLATE{default=""}%"
+  exclude="TopicType|TopicTitle"
+  includeattr="\bc\b"
+  Summary_value=""
+  format="<div class='foswikiFormStep'><h3>$title:$mandatory</h3>$edit</div>"
+}%
+%RENDERFOREDIT{
+  form="%FORM{default="%INCLUDINGWEB%.%INCLUDINGTOPIC%"}%"
+  topic="%TEMPLATE{default=""}%"
+  fields="TopicType,WikiApplication,Summary"
+  excludeattr="\bc\b"
+  WikiApplication_value="%FLEXWEBLIST{include="%BASEWEB%" format="$name"}%" 
+  TopicType_value="%TYPE{
+    default="%RENDERFORDISPLAY{
+      form="%FORM{default="%INCLUDINGWEB%.%INCLUDINGTOPIC%"}%"
+      fields="TopicType"
+      format="$values"
+    }%"
+  }%"
+  Summary_value=""
+  header=""
+  footer=""
+  format="<input type='hidden' name='$name' value='$value' />"
+  separator="$n"
+}%
+  <div class="foswikiFormStep foswikiFormButtons">
+    %BUTTON{"%MAKETEXT{"Submit"}%" type="submit" icon="tick"}%
+    %CLEAR%
+  </div>
+</div>
+</form> 
+</noautolink>
+%ENDTWISTY%
+%JQREQUIRE{"wikiword"}%<!-- -->
+<!-- -->%STOPINCLUDE%
+</verbatim>
+
+---++ Test
+%DBCALL{"%TOPIC%" 
+   TEXT="Create a new Topic" 
+   VALUE="Foo topic..."
+   XXTOPICVALUE="WikiTopicAUTOINC0"  
+   TYPE="WikiTopic" 
+   FORM="WikiTopic"
+}%
+
+---++ Copyright
+&copy; 2006-2013 Michael Daum http://michaeldaumconsulting.com
+
+%DBCALL{"GnuGeneralPublicLicense" section="notice"}%
+
+%META:FORM{name="Applications.ApplicationTopic"}%
+%META:FIELD{name="TopicType" title="TopicType" value="TopicFunction"}%
+%META:FIELD{name="TopicTitle" attributes="" title="<nop>TopicTitle" value=""}%
+%META:FIELD{name="Summary" attributes="c" title="Summary" value="TopicFunction to display a simple form to create a new topic"}%
+%META:FIELD{name="WikiApplication" attributes="" title="WikiApplication" value="WikiWorkbench"}%

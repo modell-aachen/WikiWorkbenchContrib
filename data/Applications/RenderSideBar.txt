@@ -1,0 +1,22 @@
+%META:TOPICINFO{author="ProjectContributor" comment="autosave" date="1356278736" format="1.1" version="8"}%
+%META:TOPICPARENT{name="TopicFunction"}%
+---++ Implementation
+<verbatim class="tml">
+%STARTINCLUDE% <!-- rendersidebar -->
+   * TopicTypes
+   * DataForms
+   * DataFormAttributes
+   * TopicTemplates
+   * TopicViews
+   * TopicFunctions
+<!-- rendersidebar -->%STOPINCLUDE%
+</verbatim>
+
+%DBCALL{"Applications.RenderFunctionCallers"}%
+
+
+%META:FORM{name="Applications.ApplicationTopic"}%
+%META:FIELD{name="TopicType" title="TopicType" value="TopicFunction"}%
+%META:FIELD{name="TopicTitle" attributes="" title="<nop>TopicTitle" value=""}%
+%META:FIELD{name="Summary" attributes="c" title="Summary" value="Render the sidebar navigation for the WikiWorkbench"}%
+%META:FIELD{name="WikiApplication" attributes="" title="WikiApplication" value="WikiWorkbench"}%

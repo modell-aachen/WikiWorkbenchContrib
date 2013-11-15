@@ -1,0 +1,31 @@
+%META:TOPICINFO{author="micha" comment="autosave" date="1366187411" format="1.1" version="7"}%
+%TOC%
+
+---++ Appearance
+
+   * Set WEBBGCOLOR = #E2DCC8
+   * Set WEBSUMMARY = 
+   * Set SITEMAPLIST = on
+
+---++ Access control
+
+   * Set #DENYWEBVIEW =
+   * Set #ALLOWWEBVIEW = 
+   * Set DENYWEBCHANGE = %USERSWEB%.WikiGuest
+   * Set ALLOWWEBCHANGE = %USERSWEB%.AdminGroup
+   * Set ALLOWWEBRENAME = %USERSWEB%.AdminGroup
+   * Set DENYWEBCOMMENT = %USERSWEB%.WikiGuest
+
+   * Set ALLOWTOPICCHANGE = %USERSWEB%.AdminGroup
+   * Set ALLOWTOPICRENAME = %USERSWEB%.AdminGroup
+
+---++ Wiki application settings
+
+   * Set WEBFORMS = Applications.ApplicationTopic, Applications.TopicStub, Applications.WikiTopic
+
+%META:FORM{name="Applications.ApplicationTopic"}%
+%META:FIELD{name="TopicType" title="TopicType" value="WebTool"}%
+%META:FIELD{name="TopicTitle" attributes="" title="<nop>TopicTitle" value=""}%
+%META:FIELD{name="Summary" attributes="c" title="Summary" value="Preferences of the <nop>%25WEB%25 web"}%
+%META:FIELD{name="WikiApplication" attributes="" title="WikiApplication" value="WikiWorkbench"}%
+%META:PREFERENCE{name="DISPLAYFORM" title="DISPLAYFORM" type="Local" value="off"}%

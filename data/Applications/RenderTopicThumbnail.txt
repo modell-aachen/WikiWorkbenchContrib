@@ -1,0 +1,84 @@
+%META:TOPICINFO{author="micha" comment="reprev" date="1366970119" format="1.1" reprev="16" version="17"}%
+%META:TOPICPARENT{name="TopicFunction"}%
+%TOC{depth="2"}%
+
+---++ Documentation
+%STARTSECTION{"documentation"}%
+This function gets the first image attachment from a topic and creates
+a 48x48 thumbnail using <nop>ImagePlugin. The attachment taken must end
+with =jpeg, jpg, gif, bmp, svg or png=. If there are multiple image attachments
+then the first one ordered by comment and name is taken. The empty string
+is returned if no image attachment is found.
+
+---+++++ Parameters
+   * OBJECT: topic to generate a thumbnail for
+   * ALIGN: optional alignment of image, defaults to right
+   * SIZE: optional size of thumbnail
+   * TYPE: image rendering type, see documentation of <nop>ImagePlugin, defaults to simple
+   * CROP
+   * SORT: specifies which image to chose from the attachments, defaults to =comment:name= which will take the one that sorts first wrt the comment, falling back to the name
+
+%ENDSECTION{"documentation"}%
+
+---++ Implementation
+<verbatim class="tml">
+%STARTINCLUDE%%ATTACHMENTS{
+   "%OBJECT%"
+   name=".*\.(jpe?g|gif|png|bmp|svg|JE?PG|GIF|PNG|BMP|SVG)"
+   warn="off"
+   limit="1"
+   sort="%SORT{default="comment:name"}%"
+   reverse="%IF{"'%SORT%' = 'date'" then="on" else="off"}%"
+   hidenull="on"
+   format="$percntIMAGE{
+     \"$name\"
+     topic=\"$web.$topic\"
+     align=\"%ALIGN{default="right"}%\"
+     type=\"%TYPE{default="simple"}%\"
+     size=\"%SIZE{default="48x48>"}%\"
+     crop=\"%CROP{default="northwest"}%\"
+     title=\"\"
+     tooltip=\"on\"
+     warn=\"off\"
+   }$percnt"
+}%%STOPINCLUDE%
+</verbatim>
+
+---++ Test
+%DBCALL{"%TOPIC%" 
+  OBJECT="%WIKIUSERNAME%"
+  ALIGN="left"
+}%
+%DBCALL{"%TOPIC%" 
+  OBJECT="%WIKIUSERNAME%"
+  SORT="date"
+  ALIGN="left"
+  SIZE="100x100"
+}%
+%CLEAR%
+
+---++ List of all attachments at %WIKIUSERNAME%
+<a name="sort"></a>
+%ATTACHMENTS{
+   "%WIKIUSERNAME%"
+   name=".*\.(jpe?g|gif|png|JE?PG|GIF|PNG)"
+   sort="%URLPARAM{"sort"}%"
+   hidenull="on"
+   header="| *#* | *Name* | *Date* | *Size*| *Comment* | *Image* |$n"
+   format="| $index | <nop>$name | $date | $size | $comment | <img src='$url' width='50' /> |"
+}%
+</div>
+
+%DBCALL{"Applications.RenderFunctionCallers"}%
+
+---++ Copyright
+&copy; 2006-2013 Michael Daum http://michaeldaumconsulting.com
+
+%DBCALL{"Applications.GnuGeneralPublicLicense" section="notice"}%
+
+
+%META:FORM{name="Applications.ApplicationTopic"}%
+%META:FIELD{name="TopicType" title="TopicType" value="DocuTopic, TopicFunction"}%
+%META:FIELD{name="TopicTitle" attributes="" title="<nop>TopicTitle" value=""}%
+%META:FIELD{name="Summary" attributes="c" title="Summary" value="Display thumbnail image for a topic"}%
+%META:FIELD{name="WikiApplication" attributes="" title="WikiApplication" value="WikiWorkbench"}%

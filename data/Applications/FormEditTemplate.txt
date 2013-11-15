@@ -1,0 +1,10 @@
+%META:TOPICINFO{author="ProjectContributor" comment="autosave" date="1356278736" format="1.1" version="1"}%
+%META:TOPICPARENT{name="TopicView"}%
+%{<verbatim class="tml">}%
+%TMPL:INCLUDE{"editform"}%
+%{</verbatim>}%
+
+%META:FORM{name="Applications.ApplicationTopic"}%
+%META:FIELD{name="TopicType" attributes="" title="TopicType" value="TopicView"}%
+%META:FIELD{name="Summary" attributes="" title="Summary" value="TopicView to edit the DataForm only"}%
+%META:FIELD{name="WikiApplication" attributes="" title="WikiApplication" value="WikiWorkbench"}%

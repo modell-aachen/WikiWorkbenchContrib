@@ -1,0 +1,22 @@
+%META:TOPICINFO{author="ProjectContributor" comment="autosave" date="1356278737" format="1.1" version="5"}%
+%META:TOPICPARENT{name="TopicType"}%
+%DBCALL{"RenderTopicInstaller" TYPE="TopicType" PARENT="TopicType"}%
+---++ Documentation
+%STARTSECTION{"documentation"}%
+Note, that there is no creator to build a topic of this kind as it is a pure "marker type", that is topics
+are created with another creator tool and then in addition marked to be an WebTool. Topics of this type
+are ApplicationTopics too and take associated DataForm.
+%ENDSECTION{"documentation"}%
+
+---++ Topics of type '%TOPIC%'
+%STARTINCLUDE%<!-- -->
+%DBCALL{"Applications.RenderTopicsOfType"}%
+%STOPINCLUDE%
+
+
+%META:FORM{name="Applications.TopicType"}%
+%META:FIELD{name="TopicType" title="TopicType" value="TopicType"}%
+%META:FIELD{name="TopicTitle" attributes="" title="<nop>TopicTitle" value="WebTool"}%
+%META:FIELD{name="Inheritance" attributes="" title="Inheritance" value="WikiTopic"}%
+%META:FIELD{name="Summary" attributes="" title="Summary" value="TopicType for topics on the administrative level"}%
+%META:FIELD{name="WikiApplication" attributes="" title="WikiApplication" value="WikiWorkbench"}%
